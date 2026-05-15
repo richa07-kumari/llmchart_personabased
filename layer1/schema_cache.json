@@ -1,0 +1,313 @@
+{
+  "table_name": "SUPERSTORE_ORDERS",
+  "total_rows": 9994,
+  "columns": [
+    {
+      "name": "ROW_ID",
+      "data_type": "NUMBER",
+      "is_nullable": false,
+      "null_count": 0,
+      "unique_count": 9994,
+      "min_val": "1",
+      "max_val": "9994",
+      "sample_values": ["1", "42", "156", "789", "2847"],
+      "description": "Unique identifier for each order row in the dataset",
+      "role": "identifier",
+      "aggregations": ["COUNT"],
+      "chart_types": [],
+      "is_filterable": false,
+      "is_groupable": false,
+      "business_notes": "Primary key — typically excluded from analytical visualizations",
+      "example_questions": []
+    },
+    {
+      "name": "ORDER_ID",
+      "data_type": "TEXT",
+      "is_nullable": false,
+      "null_count": 0,
+      "unique_count": 4862,
+      "min_val": "CA-2016-100006",
+      "max_val": "US-2018-107570",
+      "sample_values": [
+        "CA-2016-100006",
+        "US-2016-100039",
+        "CA-2017-102000",
+        "US-2017-105000",
+        "CA-2018-108500"
+      ],
+      "description": "Unique order identifier combining country code, year, and order number",
+      "role": "identifier",
+      "aggregations": ["COUNT", "COUNT DISTINCT"],
+      "chart_types": [],
+      "is_filterable": true,
+      "is_groupable": false,
+      "business_notes": "Format: CC-YYYY-XXXXXX (country-year-sequence)",
+      "example_questions": ["How many unique orders were placed?"]
+    },
+    {
+      "name": "ORDER_DATE",
+      "data_type": "DATE",
+      "is_nullable": false,
+      "null_count": 0,
+      "unique_count": 1461,
+      "min_val": "2016-01-04",
+      "max_val": "2019-12-30",
+      "sample_values": [
+        "2016-01-04",
+        "2016-06-15",
+        "2017-03-21",
+        "2018-09-10",
+        "2019-11-28"
+      ],
+      "description": "The date when the order was placed by the customer",
+      "role": "dimension",
+      "aggregations": ["COUNT", "MIN", "MAX"],
+      "chart_types": ["line chart", "bar chart", "trend analysis"],
+      "is_filterable": true,
+      "is_groupable": true,
+      "business_notes": "Ranges from 2016-01-04 to 2019-12-30; supports time-series analysis",
+      "example_questions": [
+        "What is the trend of order volume over time?",
+        "Which month had the highest sales?"
+      ]
+    },
+    {
+      "name": "SALES",
+      "data_type": "NUMBER",
+      "is_nullable": false,
+      "null_count": 0,
+      "unique_count": 4589,
+      "min_val": "0.44",
+      "max_val": "22638.48",
+      "sample_values": ["10.50", "254.95", "1500.00", "8932.50", "15670.25"],
+      "description": "Total revenue from the order in USD",
+      "role": "measure",
+      "aggregations": ["SUM", "AVG", "MIN", "MAX", "COUNT"],
+      "chart_types": ["line chart", "bar chart", "KPI card", "treemap"],
+      "is_filterable": true,
+      "is_groupable": false,
+      "business_notes": "Can include negative values for returns and refunds; primary revenue metric",
+      "example_questions": [
+        "What is the total sales by region?",
+        "What is the average order value?"
+      ]
+    },
+    {
+      "name": "QUANTITY",
+      "data_type": "NUMBER",
+      "is_nullable": false,
+      "null_count": 0,
+      "unique_count": 14,
+      "min_val": "1",
+      "max_val": "14",
+      "sample_values": ["1", "2", "3", "5", "8"],
+      "description": "Number of units ordered in this transaction",
+      "role": "measure",
+      "aggregations": ["SUM", "AVG", "COUNT"],
+      "chart_types": ["bar chart", "line chart", "histogram"],
+      "is_filterable": true,
+      "is_groupable": false,
+      "business_notes": "Integer value ranging from 1 to 14; used for volume analysis",
+      "example_questions": [
+        "What is the average quantity per order?",
+        "Which products have highest order volume?"
+      ]
+    },
+    {
+      "name": "PROFIT",
+      "data_type": "NUMBER",
+      "is_nullable": true,
+      "null_count": 0,
+      "unique_count": 4842,
+      "min_val": "-6599.98",
+      "max_val": "8399.98",
+      "sample_values": ["-500.50", "0.00", "250.75", "2500.00", "5800.50"],
+      "description": "Net profit (or loss) from the order after deducting costs",
+      "role": "measure",
+      "aggregations": ["SUM", "AVG", "MIN", "MAX"],
+      "chart_types": ["line chart", "bar chart", "KPI card", "scatter plot"],
+      "is_filterable": true,
+      "is_groupable": false,
+      "business_notes": "Can be negative (unprofitable orders); critical for profitability analysis",
+      "example_questions": [
+        "What is total profit by product category?",
+        "Which customers are most profitable?"
+      ]
+    },
+    {
+      "name": "REGION",
+      "data_type": "TEXT",
+      "is_nullable": false,
+      "null_count": 0,
+      "unique_count": 4,
+      "min_val": "Central",
+      "max_val": "West",
+      "sample_values": ["Central", "East", "South", "West"],
+      "description": "Geographic region where the order was shipped",
+      "role": "dimension",
+      "aggregations": ["COUNT", "COUNT DISTINCT"],
+      "chart_types": ["bar chart", "pie chart", "map", "heatmap"],
+      "is_filterable": true,
+      "is_groupable": true,
+      "business_notes": "Four distinct regions: Central, East, South, West; key for geographic analysis",
+      "example_questions": [
+        "Which region has the highest sales?",
+        "How does profit vary by region?"
+      ]
+    },
+    {
+      "name": "SEGMENT",
+      "data_type": "TEXT",
+      "is_nullable": false,
+      "null_count": 0,
+      "unique_count": 3,
+      "min_val": "Consumer",
+      "max_val": "Home Office",
+      "sample_values": ["Consumer", "Corporate", "Home Office"],
+      "description": "Customer segment: Consumer, Corporate, or Home Office",
+      "role": "filter",
+      "aggregations": ["COUNT", "COUNT DISTINCT"],
+      "chart_types": ["bar chart", "pie chart"],
+      "is_filterable": true,
+      "is_groupable": true,
+      "business_notes": "Only 3 categories; use for slicing and filtering analysis",
+      "example_questions": [
+        "What is the revenue by customer segment?",
+        "Which segment is most profitable?"
+      ]
+    },
+    {
+      "name": "CATEGORY",
+      "data_type": "TEXT",
+      "is_nullable": false,
+      "null_count": 0,
+      "unique_count": 3,
+      "min_val": "Furniture",
+      "max_val": "Technology",
+      "sample_values": ["Furniture", "Office Supplies", "Technology"],
+      "description": "Product category: Furniture, Office Supplies, or Technology",
+      "role": "dimension",
+      "aggregations": ["COUNT", "COUNT DISTINCT"],
+      "chart_types": ["bar chart", "pie chart", "treemap"],
+      "is_filterable": true,
+      "is_groupable": true,
+      "business_notes": "Three distinct product categories",
+      "example_questions": [
+        "What is the sales breakdown by category?",
+        "Which category has highest profit margin?"
+      ]
+    },
+    {
+      "name": "SUB_CATEGORY",
+      "data_type": "TEXT",
+      "is_nullable": false,
+      "null_count": 0,
+      "unique_count": 17,
+      "min_val": "Accessories",
+      "max_val": "Tables",
+      "sample_values": [
+        "Accessories",
+        "Chairs",
+        "Copiers",
+        "Desks",
+        "Machines"
+      ],
+      "description": "Detailed product sub-category under the main category",
+      "role": "dimension",
+      "aggregations": ["COUNT", "COUNT DISTINCT"],
+      "chart_types": ["bar chart", "treemap", "scatter plot"],
+      "is_filterable": true,
+      "is_groupable": true,
+      "business_notes": "17 sub-categories total; provides granular product segmentation",
+      "example_questions": [
+        "What is the sales by product subcategory?",
+        "Which sub-category is most profitable?"
+      ]
+    },
+    {
+      "name": "CUSTOMER_ID",
+      "data_type": "TEXT",
+      "is_nullable": false,
+      "null_count": 0,
+      "unique_count": 793,
+      "min_val": "AA-10315",
+      "max_val": "ZO-13185",
+      "sample_values": [
+        "AA-10315",
+        "AB-10375",
+        "AC-10410",
+        "AD-10585",
+        "AE-10630"
+      ],
+      "description": "Unique identifier for each customer",
+      "role": "identifier",
+      "aggregations": ["COUNT", "COUNT DISTINCT"],
+      "chart_types": [],
+      "is_filterable": true,
+      "is_groupable": false,
+      "business_notes": "Primary key for customer dimension; format: XX-XXXXX",
+      "example_questions": ["How many unique customers do we have?"]
+    },
+    {
+      "name": "CUSTOMER_NAME",
+      "data_type": "TEXT",
+      "is_nullable": false,
+      "null_count": 0,
+      "unique_count": 793,
+      "min_val": "Aaron Bergman",
+      "max_val": "Yuri Mera",
+      "sample_values": [
+        "Aaron Bergman",
+        "Bob Smith",
+        "Carol Johnson",
+        "David Lee",
+        "Emma Wilson"
+      ],
+      "description": "Full name of the customer who placed the order",
+      "role": "dimension",
+      "aggregations": ["COUNT", "COUNT DISTINCT"],
+      "chart_types": ["bar chart"],
+      "is_filterable": true,
+      "is_groupable": true,
+      "business_notes": "Often used for reporting and customer analysis",
+      "example_questions": ["Who is our top customer by sales?"]
+    },
+    {
+      "name": "SHIP_MODE",
+      "data_type": "TEXT",
+      "is_nullable": false,
+      "null_count": 0,
+      "unique_count": 4,
+      "min_val": "First Class",
+      "max_val": "Standard Class",
+      "sample_values": [
+        "First Class",
+        "Same Day",
+        "Second Class",
+        "Standard Class"
+      ],
+      "description": "Shipping method used for this order",
+      "role": "filter",
+      "aggregations": ["COUNT", "COUNT DISTINCT"],
+      "chart_types": ["bar chart", "pie chart"],
+      "is_filterable": true,
+      "is_groupable": true,
+      "business_notes": "Four distinct shipping modes; low cardinality useful for filtering",
+      "example_questions": [
+        "What is the distribution of shipments by mode?",
+        "Does shipping mode affect profit?"
+      ]
+    }
+  ],
+  "measures": ["SALES", "QUANTITY", "PROFIT"],
+  "dimensions": [
+    "ORDER_DATE",
+    "REGION",
+    "CATEGORY",
+    "SUB_CATEGORY",
+    "CUSTOMER_NAME"
+  ],
+  "filters": ["SEGMENT", "SHIP_MODE"],
+  "identifiers": ["ROW_ID", "ORDER_ID", "CUSTOMER_ID"],
+  "extracted_at": "2026-05-15T12:00:00"
+}
