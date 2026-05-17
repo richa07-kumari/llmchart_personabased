@@ -1,4 +1,4 @@
-This is a persona based llm chart generator. It takes the role of the person and give me relevant charts about business insights, which could give him a broader or a narrower view of specifics, solving business problems accurately.
+This is a persona based llm chart generator. It takes the role of the person and give him relevant charts to explain about business insights, which could give him a broader or a narrower view of specifics, solving business problems accurately.
 
 <img width="1905" height="911" alt="image" src="https://github.com/user-attachments/assets/af869042-adce-415b-b69d-771a1400f095" />
 
